@@ -28,7 +28,12 @@ app.use((err, req, res, next) => {
 app.post("/upload-file", upload.single('wordFile'), async (req, res) => {
     const { wordFile } = req.file;
     const result = await mammoth.extractRawText({ buffer: req.file.buffer })
-    console.log(result);
+
+    const cleaned = result.value
+    .replace(/\r/g, "")
+    .replace(/\n{2,}/g, "\n")   // collapse blank lines
+    .trim();
+    console.log(cleaned);
 })  
 
 export default app;

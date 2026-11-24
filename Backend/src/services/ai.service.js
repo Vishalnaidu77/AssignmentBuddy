@@ -6,3 +6,15 @@ const model = new ChatOpenRouter({
     apiKey: CONFIG.OPENROUTER_API_KEY
 })
 
+export async function cleanedBlob(text){
+    try {
+        const response = await model.invoke([
+            {
+                role: 'ai',
+                content: ''
+            }
+        ])
+    } catch (err) {
+        
+    }
+}
